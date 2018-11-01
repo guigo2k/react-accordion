@@ -1,13 +1,12 @@
 import React, { Component } from "react";
+import _ from 'lodash';
 import PropTypes from "prop-types";
 
-import AccordionSection from "./AccordionSection";
-
 class Accordion extends Component {
-  static propTypes = {
-    allowMultipleOpen: PropTypes.bool,
-    children: PropTypes.instanceOf(Object).isRequired,
-  };
+  // static propTypes = {
+  //   allowMultipleOpen: PropTypes.bool,
+  //   children: PropTypes.instanceOf(Object).isRequired,
+  // };
 
   static defaultProps = {
     allowMultipleOpen: false,
@@ -16,64 +15,95 @@ class Accordion extends Component {
   constructor(props) {
     super(props);
 
-    const openSections = {};
+    const { tableContent } = props;
 
-    this.props.children.forEach(child => {
-      if (child.props.isOpen) {
-        openSections[child.props.label] = true;
-      }
+    const openSections = [];
+
+    tableContent.forEach(child => {
+      openSections.push(false);
     });
 
     this.state = { openSections };
   }
 
-  onClick = label => {
+  onClick = index => {
     const { props: { allowMultipleOpen }, state: { openSections } } = this;
+    const isOpen = !!openSections[index];
 
-    const isOpen = !!openSections[label];
-
+    let newSections;
     if (allowMultipleOpen) {
-      this.setState({
-        openSections: {
-          ...openSections,
-          [label]: !isOpen
-        }
-      });
+      newSections = openSections;
+      newSections[index] = !openSections[index];
+
     } else {
-      this.setState({
-        openSections: {
-          [label]: !isOpen
+      newSections = [];
+      for (let i = 0; i < openSections.length; i++) {
+        if (i === index) {
+          newSections.push(!openSections[index]);
+        } else {
+          newSections.push(false);
         }
-      });
+      }
     }
+
+    this.setState({
+      openSections: newSections,
+    });
   };
 
   render() {
     const {
       onClick,
-      props: { children },
+      props: { tableContent, TableElement },
       state: { openSections },
     } = this;
+
+    console.log('====>', tableContent);
 
     return (
       <div>
         <div className="instancesHeader">Instances</div>
-        {children.map(child => (
-          <AccordionSection
-            isOpen={!!openSections[child.props.label]}
-            label={child.props.label}
-            onClick={onClick}
-          >
-            {child.props.children}
-          </AccordionSection>
-        ))}
+        {
+          tableContent.map((item, index) => {
+            const thisProps = {
+              ...item,
+              tableIndex: index,
+              isOpen: openSections[index],
+              onClick,
+            };
+
+            return (
+            <TableElement {...thisProps} />);
+          })
+        }
         <div className="instancesFooter">
           <i class="fas fa-chevron-right"></i>
           <span className="text">01 of 3</span>
           <i class="fas fa-chevron-right"></i>
         </div>
       </div>
-    );
+    )
+
+    // return (
+    //   <div>
+    //     <div className="instancesHeader">Instances</div>
+    //     {children.map(child => (
+    //       <AccordionSection
+    //         isOpen={!!openSections[child.label]}
+    //         label={child.label}
+    //         onClick={onClick}
+    //       >
+    //         {child.children}
+    //       </AccordionSection>
+    //     ))}
+    //     <div className="instancesFooter">
+    //       <i class="fas fa-chevron-right"></i>
+    //       <span className="text">01 of 3</span>
+    //       <i class="fas fa-chevron-right"></i>
+    //     </div>
+    //   </div>
+    // );
+
   }
 }
 
