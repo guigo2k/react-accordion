@@ -1,0 +1,114 @@
+body {
+  padding: 10px;
+  font-family: "Lato";
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.instancesHeader {
+  border: 1px solid #bdbdbd;
+  border-radius: 4px 4px 0 0;
+  border-bottom: none;
+  padding: 10px;
+  color: #00a4b1;
+  font-size: 16px;
+  font-family: "Lato";
+}
+
+.instancesFooter {
+  border: 1px solid #bdbdbd;
+  border-radius: 0 0 4px 4px;
+  padding: 10px;
+  color: #a3a3a3;
+  font-size: 11px;
+  font-family: "Lato";
+}
+
+.instancesFooter .text {
+  padding: 5px;
+}
+
+.instancesItem {
+  border: 1px solid #bdbdbd;
+  border-bottom: none;
+  padding: 10px;
+}
+
+.instancesLabel {
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.instancesLabel i {
+  width: 15px;
+}
+
+.instancesTable {
+  padding: 15px;
+  width: 100%;
+}
+
+.instancesTable .project {
+  width: 70%;
+  font-size: 13px;
+}
+
+.instancesTable .project a {
+  color: #000;
+}
+
+.instancesTable .project span.title {
+  display: block;
+  color: #a3a3a3;
+}
+
+.instancesTable .project span.text {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.instancesTable .action {
+  padding-left: 15px;
+  border-left: 1px solid #bdbdbd;
+}
+
+.instancesTable .action button {
+  width: 150px;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  border-radius: 50px;
+  border: 2px solid #bdbdbd;
+  background-color: transparent;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: "Lato";
+  font-size: 10px;
+  display: block;
+  cursor: pointer;
+  outline: none !important;
+}
+
+.instancesTable .action button.bt-light {
+  border: 2px solid #00a4b1;
+  color: #00a4b1;
+}
+
+.instancesTable .action button.bt-full {
+  border: 2px solid #00a4b1;
+  background-color: #00a4b1;
+  color: #fff;
+}
+
+.instancesTable .action button.bt-red-light {
+  border: 2px solid #d50935;
+  color: #d50935;
+}
+
+.instancesTable .action button.bt-red-full {
+  border: 2px solid #d50935;
+  background-color: #d50935;
+  color: #fff;
+}
